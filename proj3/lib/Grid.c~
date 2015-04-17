@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "graphics.h"
+
+#define USECPP 0
+
+/* create a grid */
+Grid *create_grid( char *filename ){
+
+Grid *g = malloc(sizeof(Grid));

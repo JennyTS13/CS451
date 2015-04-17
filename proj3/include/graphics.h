@@ -18,16 +18,28 @@ typedef struct {
 } Image;
 
 typedef struct {
-    Image *image;
-    float intensity;
-    char ascii;//error checking purposes
+  Image *image;
+  float intensity;
+  char ascii;//error checking purposes
 } Character;
 
 typedef struct{
-    Character **chars;
-    int type; //0 for default 10, 1 for all
-    int size; //size of character set
+  Character **chars;
+  int type; //0 for default 10, 1 for all
+  int size; //size of character set
 } CharSet;
+
+typedef struct{
+  Image *original;
+  Image *after;
+  Image **grid;
+  float **intensity;
+  float **r;
+  float **g;
+  float **b;
+  int rows;
+  int cols;
+} Grid;
 
 Pixel *readPPM(int *rows, int *cols, int * colors, char *filename);
 void writePPM(Pixel *image, int rows, int cols, int colors, char *filename);
@@ -72,5 +84,12 @@ void char_read( CharSet *c );
 void set_intensity(CharSet *c);
 void quickSort( CharSet *c, int start, int end );
 void set_optimize( CharSet *c );
+Image *binary_search( CharSet *c, int start, int stop, float intensity );
 
+/* Grid */
+Grid *create_grid( char *filename );
+void grid_free( Grid *g );
+void read_to_grid( Grid *g );
+void char_to_grid( Grid *g, CharSet *c );
+void grid_to_pic( Grid *g );
 #endif

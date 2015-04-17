@@ -183,3 +183,33 @@ void set_optimize( CharSet *c ){
     c->chars[i]->intensity = 255.0*(c->chars[i]->intensity - min) / range;
   }
 }
+
+/* returns the character with intensity closest to requested */
+Image *binary_search( CharSet *c, int start, int stop, float intensity ){
+  
+  int half_dist;
+  //printf( "start: %d, stop: %d \n", start, stop);
+  
+  if(start == stop)
+    return c->chars[start]->image;
+
+  //in between
+  if(stop - start == 1){
+    //closer to start
+    if((c->chars[stop]->intensity - intensity) > 
+       (intensity - c->chars[start]->intensity)){
+      return c->chars[start]->image;
+    }
+    else{
+      return c->chars[stop]->image;
+    }
+  }
+
+  half_dist = (stop - start)/2;
+
+  if(c->chars[half_dist]->intensity >= intensity)
+    return binary_search( c, start, start+half_dist, intensity );
+  else
+    return binary_search( c, start+half_dist+1, stop, intensity );
+
+}
