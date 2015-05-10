@@ -1,3 +1,6 @@
+/* Beatrice Liang and Jenny Lin */
+/* Spring 2015 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,7 +71,6 @@ void set_free( CharSet *c ){
   //printf("Entering set_free\n");
   int i;
   for(i=0; i<c->size; i++){
-    //printf("characters freed %d\n", i);
     image_dealloc( c->chars[i]->image );
     free(c->chars[i]);
   }
@@ -192,7 +194,7 @@ Image *binary_search( CharSet *c, int start, int stop, float intensity ){
   
   if(start == stop)
     return c->chars[start]->image;
-
+    
   //in between
   if(stop - start == 1){
     //closer to start
